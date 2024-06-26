@@ -8,7 +8,7 @@ jobs:
   check_files:
     runs-on: ubuntu-latest
     outputs:
-      test-env: ${{ steps.set-env.outputs.test-env }}
+      test-env: ${{ steps.check_files.outputs.test-env }}
     steps:
       - uses: actions/checkout@v4
         name: checkout
@@ -20,11 +20,10 @@ jobs:
         run: |
           echo "Checking changed files..."
           if git diff HEAD^ --name-only | grep -q 'src/test.yaml'; then
-            echo "test-env=test" >> $GITHUB_OUTPUT
+            echo "test-env=test" >> $GITHUB_ENV
           else
-            echo "test-env=none" >> $GITHUB_OUTPUT
+            echo "test-env=none" >> $GITHUB_ENV
           fi
 
       - name: echo test-env
-        shell: bash
         run: echo ${{ needs.check_files.outputs.test-env }}

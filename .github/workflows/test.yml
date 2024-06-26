@@ -26,4 +26,4 @@ jobs:
           fi
 
       - name: echo test-env
-        run: echo ${{ needs.check_files.outputs.test-env }}
+        run: echo ${{ steps.set-env.outputs.test-env }}

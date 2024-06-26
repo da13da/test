@@ -19,7 +19,7 @@ jobs:
         id: set-env
         run: |
           echo "Checking changed files..."
-          if git diff HEAD^ --name-only | grep -q 'k8s/nodex-hub/prod/Deployment/kustomization.yaml'; then
+          if git diff HEAD^ --name-only | grep -q 'src/test.yaml'; then
             echo "test-env=test" >> $GITHUB_OUTPUT
           else
             echo "test-env=none" >> $GITHUB_OUTPUT
